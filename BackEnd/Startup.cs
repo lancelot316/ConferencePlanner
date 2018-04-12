@@ -1,5 +1,5 @@
 ﻿using System.Runtime.InteropServices;
-using BackEnd.Models;
+using BackEnd.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -52,6 +52,10 @@ namespace BackEnd
             }
 
             app.UseMvc();
+
+            // Comment out the following line to avoid resetting the database each time
+            var loader = new DevIntersectionLoader(app.ApplicationServices);
+            loader.LoadData("DevIntersection_Vegas_2017.json", "DevIntersection Vegas 2017");
         }
     }
 }
